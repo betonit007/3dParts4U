@@ -6,7 +6,7 @@ const HomeScreen = () => {
     return (
         <>
           <div className="grid grid-3 my-2">
-              {products.map(product => <Product product={product}/>)}
+              {products.map(product => <Product key={product._id} product={product}/>)}
           </div>
         </>
     ) 

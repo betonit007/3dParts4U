@@ -31,7 +31,7 @@ export const products = [
         brand: "Northrop Grumman",
         category: "Military",
         price: 131400000.00,
-        countInStock: 1,
+        countInStock: 0,
         rating: 5.0,
         numReviews: 1
     },

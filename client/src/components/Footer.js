@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <footer class="footer bg-dark py-5">
-            <div class="container grid grid-3">
+        <footer className="footer bg-dark py-5">
+            <div className="container grid grid-3">
                 <div>
                     <h1>UA-Systems-4U</h1>
                     <p>
@@ -11,15 +12,13 @@ const Footer = () => {
                 </p>
                 </div>
                 <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                    </ul>
+                   <Link to='/'>Home</Link>
                 </nav>
-                <div class="social">
-                    <a href="#"><i class="fab fa-github fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+                <div className="social">
+                    <Link to="#"><i className="fab fa-github fa-2x"></i></Link>
+                    <Link to="#"><i className="fab fa-facebook fa-2x"></i></Link>
+                    <Link to="#"><i className="fab fa-instagram fa-2x"></i></Link>
+                    <Link to="#"><i className="fab fa-twitter fa-2x"></i></Link>
                 </div>
             </div>
         </footer>

@@ -1,15 +1,20 @@
+import Rating from './Rating'
+import {Link} from 'react-router-dom'
 
 const Product = ({ product }) => {
     return (
         <div className='card product'>
-            <a href={`product/${product._id}`}>
+            <Link to={`/product/${product._id}`}>
                 <img src={product.image} alt={product.description} />
-            </a>
+            </Link>
             <h3>
                 {product.name}
             </h3>
             <div >
-                {product.rating} from {product.numReviews} reviews
+               <Rating 
+                 rating={product.rating}
+                />
+                <span>{product.rating} from {product.numReviews} reviews</span>
             </div>
             <h3 >${product.price}</h3>
             {/* <p>{product.description}</p> */}
