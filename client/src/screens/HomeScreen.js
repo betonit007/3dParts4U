@@ -1,8 +1,21 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Product from '../components/Product'
-import { products } from '../products.js'
 
 const HomeScreen = () => {
+
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+      const getProducts = async () => {
+          console.log('getting products')
+          const { data } = await axios.get('/api/products')
+          console.log(data)
+          setProducts(data)
+      }
+      getProducts()
+    }, [])
+
     return (
         <>
           <div className="grid grid-3 my-2">

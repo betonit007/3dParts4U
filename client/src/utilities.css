@@ -5,6 +5,7 @@
     margin: 0 auto;
     overflow: auto;
     padding: 0 40px;
+    overflow: hidden;
 }
 
 .card {
@@ -130,11 +131,6 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
-}
-
-.no-align {
-    justify-content: left;
-    align-items: baseline;
 }
 
 .column {
