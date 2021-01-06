@@ -9,6 +9,7 @@
 }
 
 .card {
+    height: 100%;
     background-color: #fff;
     color: #333;
     border-radius: 10px;
@@ -131,6 +132,11 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
+    width: 100%;
+}
+
+.calc-height {
+    min-height: calc(100vh - 163px);
 }
 
 .column {
@@ -150,7 +156,15 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.w-100 {
+    width: 100%;
+}
+
 /* Margin */
+.mx-1 {
+    margin: 0 1rem;
+}
+
 .my-1 {
     margin: 1rem 0;
 }

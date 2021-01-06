@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
 
 const Rating = ({ rating, numOfStars, color, text }) => {
+    
     return (
         <div className='rating'>
             {[...Array(numOfStars)].map((star, i) => (
@@ -15,11 +15,7 @@ const Rating = ({ rating, numOfStars, color, text }) => {
 
 Rating.defaultProps = {
     color: '#f8e825',
-    numOfStars: 5
-}
-
-Rating.propTypes = {
-    rating: PropTypes.number.isRequired
+    numOfStars: 5,
 }
 
 export default Rating

@@ -1,28 +1,26 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { listProducts } from '../actions/productActions'
 import Product from '../components/Product'
 
 const HomeScreen = () => {
 
-    const [products, setProducts] = useState([])
+  const dispatch = useDispatch()
 
-    useEffect(() => {
-      const getProducts = async () => {
-          console.log('getting products')
-          const { data } = await axios.get('/api/products')
-          console.log(data)
-          setProducts(data)
-      }
-      getProducts()
-    }, [])
+  const productList = useSelector(state => state.productList)
+  const { loading, error, products } = productList
+  
+  useEffect(() => {
+    dispatch(listProducts())
+  }, [dispatch])
 
-    return (
-        <>
+  return (
+    <>
           <div className="grid grid-3 my-2">
-              {products.map(product => <Product key={product._id} product={product}/>)}
+            {products?.map(product => <Product key={product._id} product={product} />)}
           </div>
-        </>
-    ) 
+    </>
+  )
 }
 
 export default HomeScreen
