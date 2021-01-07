@@ -4,16 +4,11 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <footer className="footer bg-dark">
-            <div className="container grid grid-3">
-                <div>
-                    <h1>UA-Systems-4U</h1>
-                    <p>
+            <div className="container flex">
+                <div className='flex column'>
+                    <Link to='/'><h1>UA-Systems-4U</h1></Link>
                         Copyright &copy; 2021
-                </p>
                 </div>
-                <nav>
-                   <Link to='/'>Home</Link>
-                </nav>
                 <div className="social">
                     <Link to="#"><i className="fab fa-github fa-2x"></i></Link>
                     <Link to="#"><i className="fab fa-facebook fa-2x"></i></Link>

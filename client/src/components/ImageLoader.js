@@ -8,7 +8,7 @@ const ImageLoader = ({ product, backupSrc="/images/comingSoon.jpg" }) => {
     return (
         <div className='img-loader'>
                 <img
-                    className='original-photo w-100'
+                    className='w-100'
                     src={loadingError ? backupSrc : product.image}
                     onLoad={()=>setImageLoaded(true)}
                     onError={() =>setLoadingError(true)}

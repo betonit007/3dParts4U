@@ -8,7 +8,7 @@ const Toast = ({ position = 'top-right', autoDelete = true, dismissTime = 4000 }
     const dispatch = useDispatch()
 
     const { toastList } = useSelector(state => state.toastList)
-    console.log(toastList)
+   
     useEffect(() => {
         const interval = setInterval(() => {
             if (autoDelete && toastList.length) {
