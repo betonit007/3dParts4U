@@ -4,8 +4,6 @@
     max-width: 1100px;
     margin: 0 auto;
     padding: 10px;
-    overflow: auto;
-    overflow: hidden;
 }
 
 .card {
@@ -15,7 +13,15 @@
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0,0,0, 0.3);
     padding: 20px;
-    margin: 10px;
+}
+
+.input {
+    border: 0;
+    border-bottom: 1px solid #b4becb;
+    width: 100%;
+    padding: 3px;
+    font-size: 16px;
+    outline-width: 0;
 }
 
 .btn {
@@ -158,6 +164,10 @@
     justify-items: center;
 }
 
+.grid-offset {
+    grid-template-columns: 3fr 1fr;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -236,6 +246,10 @@
 
 .p-1 {
     padding: 1rem;
+}
+
+.px-1 {
+    padding: 0 1rem;
 }
 
 .p-2 {

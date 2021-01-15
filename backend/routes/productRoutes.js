@@ -1,29 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const Product = require('../models/product')
+const { getProductbyId, getProducts } = require('../controllers/productController')
 
-router.get('/', async (req, res) => {
-    try {
-        const products = await Product.find({})
-        res.json(products)
-    } catch (error) {
-        res.json({ msg: "Error retreiving products" })
-    }
+router.route('/').get(getProducts)
 
-})
-
-router.get('/:id', async (req, res) => {
-
-    try {
-
-        const product = await Product.findById(req.params.id)
-        res.json(product)
-
-    } catch (error) {
-        res.status(404)
-        throw new Error('Product not found')
-    }
-
-})
+router.route('/:id').get(getProductbyId)
 
 module.exports = router

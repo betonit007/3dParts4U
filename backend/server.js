@@ -5,6 +5,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 
 const productRoutes = require('./routes/productRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 dotenv.config()
 
@@ -12,7 +13,10 @@ connectDB()
 
 const app = express()
 
+app.use(express.json())
+
 app.use('/api/products', productRoutes)
+app.use('/api/user', userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)

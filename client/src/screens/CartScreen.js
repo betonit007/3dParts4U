@@ -44,8 +44,8 @@ const CartScreen = ({ match, location, history }) => {   //location returns the 
             )
                 :
                 <>
-                    <h1 className='underline'>Shopping Cart</h1>
-                    <div className="grid">
+                    <h1 className='underline my-1'>Shopping Cart</h1>
+                    <div className="grid grid-offset">
                         <div className="flex column">
                             {cartItems.map(item => (
                                 <div

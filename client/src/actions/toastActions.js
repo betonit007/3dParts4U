@@ -1,7 +1,7 @@
 import { SET_LIST, SET_TOAST } from '../constants/toastConstants'
 
 export const setToast = (message, type='success') => dispatch => {
-    console.log(message)
+    
     const toast = {
         type,
         message
