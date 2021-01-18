@@ -6,6 +6,7 @@ const connectDB = require('./config/db')
 
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(express.json())
 
 app.use('/api/products', productRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/orders', orderRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
