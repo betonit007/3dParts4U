@@ -24,7 +24,8 @@ const ProfileScreen = ({ location, history }) => {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    
+
 
     const submitHandler = e => {
         e.preventDefault()
@@ -32,7 +33,7 @@ const ProfileScreen = ({ location, history }) => {
             dispatch(setToast("Passwords do not match", "error"))
         }
         else {
-            dispatch(updateUserProfile({ id: user._id, name, email, password}))
+            dispatch(updateUserProfile({ id: user._id, name, email, password }))
         }
     }
 
@@ -40,7 +41,7 @@ const ProfileScreen = ({ location, history }) => {
         if (!userInfo) {
             history.push('/login')
         } else {
-            if ( !user || !user.name || success ) {
+            if (!user || !user.name || success) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
             } else {
@@ -48,55 +49,51 @@ const ProfileScreen = ({ location, history }) => {
                 setEmail(user.email)
             }
         }
-    }, [history, userInfo, dispatch, user, success ])
+    }, [history, userInfo, dispatch, user, success])
 
     return (
-        <div className='flex column'>
+        <>
             {/* { error && errorHandler()} */}
             {loading && <Loader />}
-
-            <h1 className='my-2'>User Profile</h1>
-            <form onSubmit={submitHandler}>
-                <input
-                    type="email"
-                    required={true}
-                    className='input my-1'
-                    placeholder='Enter Email'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                    type="text"
-                    required={true}
-                    className='input my-1'
-                    placeholder='Enter Name'
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
-                <input
-                    type="password"
-                    required={true}
-                    className='input my-1'
-                    placeholder='Enter Password'
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <input
-                    type="password"
-                    required={true}
-                    className='input my-1'
-                    placeholder='Confirm Password'
-                    value={confirmPassword}
-                    onChange={e => setConfirmPassword(e.target.value)}
-                />
-                <button className='btn' type='submit'>Submit</button>
-            </form>
-
-            <div className='my-2'>
-                Already Registered? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Signin</Link>
+            <div className='flex column'>
+                <h1 className='my-2'>Edit Profile</h1>
+                <form onSubmit={submitHandler}>
+                    <input
+                        type="email"
+                        required={true}
+                        className='input my-1'
+                        placeholder='Enter Email'
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        required={true}
+                        className='input my-1'
+                        placeholder='Enter Name'
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        required={true}
+                        className='input my-1'
+                        placeholder='Enter Password'
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        required={true}
+                        className='input my-1'
+                        placeholder='Confirm Password'
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
+                    />
+                    <button className='btn' type='submit'>Submit</button>
+                </form>
             </div>
-
-        </div>
+        </>
     )
 }
 

@@ -1,12 +1,11 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { saveShippingAddress } from '../actions/cartActions'
-import { setToast } from '../actions/toastActions'
+import { createOrder  } from '../actions/orderActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 import ImageLoader from '../components/ImageLoader'
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
 
     const cart = useSelector(state => state.cart)
 
@@ -24,6 +23,27 @@ const PlaceOrderScreen = () => {
 
     const { address, postalCode, country, city } = cart.shippingAddress
     const dispatch = useDispatch()
+
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, success } = orderCreate
+
+    useEffect(() => {
+        if (success) {
+            history.push(`/order/${order._id}`)
+        }
+    }, [history, success])
+
+    const placeOrderHandler = () => {
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+        }))
+    }
 
 
     return (
@@ -74,7 +94,7 @@ const PlaceOrderScreen = () => {
                             <p><strong>Shipping: </strong>{cart.shippingPrice}</p>
                             <p><strong>Tax: </strong>{cart.taxPrice}</p>
                             <p className='m-1'><h3>Total: </h3><strong>${cart.totalPrice}</strong></p>
-                            <button className='btn btn-light m-1'>Place Order</button>
+                            <button onClick={placeOrderHandler} className='btn btn-light m-1'>Place Order</button>
                         </div>
 
                     </div>

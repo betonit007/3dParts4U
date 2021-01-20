@@ -12,6 +12,8 @@ import ProfileScreen from './screens/ProfileScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import OrderScreen from './screens/OrderScreen'
+import OrderHistoryScreen from './screens/OrderHistoryScreen'
 
 import './utilities.css'
 import './styles.css'
@@ -24,6 +26,7 @@ const App = () => {
             <main className="container calc-height">
                 <Route path='/' exact component={HomeScreen} />
                 <Route path='/shipping' component={ShippingScreen} />
+                <Route path='/order/:id' component={OrderScreen} />
                 <Route path='/placeorder' component={PlaceOrderScreen} />
                 <Route path='/payment' component={PaymentScreen} />
                 <Route path='/login' component={ Loginscreen } />
@@ -31,6 +34,7 @@ const App = () => {
                 <Route path='/cart/:id?' component={CartScreen} /> {/* question mark after id makes it optional*/}
                 <Route path='/register' component={RegisterScreen} /> 
                 <Route path='/profile' component={ProfileScreen} /> 
+                <Route path='/orderhistory' component={OrderHistoryScreen} /> 
             </main>
             <Footer />
         </Router>

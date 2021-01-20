@@ -30,7 +30,8 @@ const Header = () => {
                           <li id="user-link"><Link to="#"><i className="far fa-user-circle"></i> {userInfo.name}</Link></li>
                           <div className="userMenu">
                               <li onClick={handleLogout}><i className="fas fa-sign-out-alt" ></i>Logout</li>
-                              <li onClick={()=>history.push('/profile')}><i className="far fa-user"></i>Edit</li>
+                              <li onClick={()=>history.push('/profile')}><i className="far fa-user"></i>Profile</li>
+                              <li onClick={()=>history.push('/orderhistory')}><i className="fas fa-clipboard-list"></i>Orders</li>
                           </div>
                           </div>
                         )
