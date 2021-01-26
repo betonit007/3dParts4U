@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from '../actions/toastActions'
 import Loader from '../components/Loader'
-import { register, clearLoginFail } from '../actions/userActions'
+import { register } from '../actions/userActions'
 
 const RegisterScreen = ({ location, history }) => {
 

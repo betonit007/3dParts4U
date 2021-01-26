@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from '../actions/toastActions'
 import { Link, useHistory } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 
@@ -13,6 +14,8 @@ const Header = () => {
 
     const handleLogout = () => {
         dispatch(logout())
+        history.push('/login')
+        dispatch(setToast('You have successfully logged out.'))
     }
 
     return (
@@ -32,6 +35,8 @@ const Header = () => {
                               <li onClick={handleLogout}><i className="fas fa-sign-out-alt" ></i>Logout</li>
                               <li onClick={()=>history.push('/profile')}><i className="far fa-user"></i>Profile</li>
                               <li onClick={()=>history.push('/orderhistory')}><i className="fas fa-clipboard-list"></i>Orders</li>
+                              {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/userlist')}><i className="fas fa-users"></i>Users</li>}
+                              {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/productlist')}><i className="fas fa-clipboard-list"></i>Products</li>}
                           </div>
                           </div>
                         )

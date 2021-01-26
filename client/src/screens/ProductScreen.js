@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
 import ImageLoader from '../components/ImageLoader'
 import { listProductsDetails } from '../actions/productActions'
+import Loader from '../components/Loader'
 
 const ProductScreen = ({ match, history }) => {
     const [qty, setQty] = useState(1)
@@ -23,7 +24,7 @@ const ProductScreen = ({ match, history }) => {
     return (
         <>
             <Link className='btn my-1' to='/'>Go Back</Link>
-            { loading ? "loading..." :
+            { loading ? <Loader /> :
                 <div className="grid">
                     <div className="image-container">
                         <ImageLoader product={product} />

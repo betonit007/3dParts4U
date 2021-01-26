@@ -13,7 +13,7 @@ const Loginscreen = ({ location, history }) => {
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
-    const { loading, error, userInfo } = userLogin
+    const { loading, userInfo } = userLogin
 
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -32,7 +32,7 @@ const Loginscreen = ({ location, history }) => {
     return (
         <div className='flex column'>
             {/* { error && errorHandler()} */}
-            { error && dispatch(setToast(`Login Failed, ${error}`, 'error'))}
+
             {loading && <Loader />}
 
             <h1 className='my-2'>Sign In</h1>
