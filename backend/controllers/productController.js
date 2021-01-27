@@ -64,12 +64,12 @@ const createProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-
+    console.log('update called')
     try {
         const {name, price, description, image, brand, category, countInStock} = req.body
-
+        console.log(req.params.id)
         const product = await Product.findById(req.params.id)
-        
+        console.log(product)
         if(product) {
             product.name = name
             product.price = price
@@ -81,7 +81,7 @@ const updateProduct = async (req, res) => {
         }
 
         const updatedProduct = await product.save()
-
+        console.log(updatedProduct)
         res.status(201).json(updatedProduct)
 
     } catch (error) {
