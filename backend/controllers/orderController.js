@@ -1,4 +1,3 @@
-const { findById } = require('../models/order')
 const Order = require('../models/order')
 
 const addOrderItems = async (req, res) => {
@@ -24,11 +23,11 @@ const addOrderItems = async (req, res) => {
 
             const createdOrder = await order.save()
             res.status(201).json(createdOrder)
-            
+
         } catch (error) {
-            res.status(402).json({msg: "No Payment Method"})
+            res.status(402).json({ msg: "No Payment Method" })
         }
-        
+
     }
 
 }
@@ -60,27 +59,36 @@ const updateOrderToPaid = async (req, res) => {
 
         const updatedOrder = await order.save()
         res.status(200).json(updatedOrder)
-        
+
     } catch (error) {
         res.status(404).json({ msg: "Order not found" })
     }
-   
-       
+
+
 
 }
 
 const getMyOrders = async (req, res) => {
 
     try {
-        const order = await Order.find({user: req.user._id})
+        const order = await Order.find({ user: req.user._id })
         res.status(200).json(order)
-        
+
     } catch (error) {
         res.status(404).json({ msg: "Orders not found" })
     }
-   
-       
-
 }
 
-module.exports = { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders }
+
+const getOrders = async (req, res) => {
+
+    try {
+        const order = await Order.find({}).populate('user', 'id name')
+        res.status(200).json(order)
+
+    } catch (error) {
+        res.status(404).json({ msg: "Orders not found" })
+    }
+}
+
+module.exports = { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getOrders }

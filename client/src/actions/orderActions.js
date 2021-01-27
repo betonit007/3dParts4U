@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { SET_TOAST } from '../constants/toastConstants'
-import { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, } from '../constants/orderConstants'
+import { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_LISTALL_FAIL, ORDER_LISTALL_REQUEST, ORDER_LISTALL_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, } from '../constants/orderConstants'
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -174,6 +174,52 @@ export const listMyOrders = () => async (dispatch, getState) => {
                     && error.response.data.msg
                     ? "Order failed, " + error.response.data.msg
                     : "Order failed, " + error.message,
+                type: "error"
+            }
+        })
+    }
+}
+
+export const listAllOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ORDER_LISTALL_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios(`/api/orders`, config)
+            console.log(data)
+        dispatch({
+            type: ORDER_LISTALL_SUCCESS,
+            payload: data
+        })
+
+
+    } catch (error) {
+
+        dispatch({
+            type: ORDER_LISTALL_FAIL,
+            payload: error.response
+                && error.response.data.msg
+                ? "List All Orders Request Failed, " + error.response.data.msg
+                : "List All Orders Request Failed, " + error.message,
+        })
+
+        dispatch({
+            type: SET_TOAST,
+            payload:
+            {
+                message: error.response
+                    && error.response.data.msg
+                    ? "List All Orders Request Failed, " + error.response.data.msg
+                    : "List All Orders Request Failed, " + error.message,
                 type: "error"
             }
         })

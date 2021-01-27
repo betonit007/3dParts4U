@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
 import Loader from '../components/Loader'
 import { listProductsDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
+import { SET_TOAST } from '../constants/toastConstants'
 
 const ProductEditScreen = ({ match, history }) => {
 
@@ -17,6 +19,7 @@ const ProductEditScreen = ({ match, history }) => {
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
+    const [uploading, setupLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -45,6 +48,38 @@ const ProductEditScreen = ({ match, history }) => {
             }
         }
     }, [dispatch, history, productId, product, successUpdate])
+
+    const uploadFileHandler = async e => {
+        const file = e.target.files[0]  //files returns an array; we just want the file one
+        const formData = new FormData()
+        formData.append('image', file)
+
+        setupLoading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/upload', formData, config)
+            
+            setImage(data)
+            setupLoading(false)
+
+        } catch (error) {
+            console.log(error.message)
+            dispatch({
+                type: SET_TOAST,
+                payload: {
+                    message: error.response && error.response.data.msg ? error.response.data.msg : error.message,
+                    type: "error"
+                }
+            })
+            setupLoading(false)
+        }
+    }
 
     const submitHandler = () => {
 
@@ -142,7 +177,28 @@ const ProductEditScreen = ({ match, history }) => {
                                 value={image}
                                 onChange={e => setImage(e.target.value)}
                             />
-                            <button className='btn' type='submit'>Update</button>
+
+                            <input
+                                type="file"
+                                placeholder='Upload Image'
+                                id="Choose-File"
+                                style={{ display: 'none' }}
+                                onChange={uploadFileHandler}
+                            />
+                            <div className='flex-end'>
+                                <label htmlFor="Choose-File" className='pointer text-primary ml-auto'>
+                                    {!uploading ?
+                                        <>
+                                            <i className='fas fa-plus'></i><strong> Upload Image</strong>
+                                        </>
+                                        :
+                                        <Loader />
+                                    }
+                                </label>
+                            </div>
+                            <div className='my-2'>
+                                <button className='btn' type='submit'>Update</button>
+                            </div>
                         </form>
                     </>
                 }
