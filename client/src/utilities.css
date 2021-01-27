@@ -178,6 +178,10 @@
     margin: 0 auto;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .mx-1 {
     margin: 0 1rem;
 }

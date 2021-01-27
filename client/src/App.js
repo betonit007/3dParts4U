@@ -16,6 +16,8 @@ import OrderScreen from './screens/OrderScreen'
 import OrderHistoryScreen from './screens/OrderHistoryScreen'
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import ProductEditScreen from './screens/ProductEditScreen'
 
 import './utilities.css'
 import './styles.css'
@@ -33,6 +35,8 @@ const App = () => {
                 <Route path='/payment' component={PaymentScreen} />
                 <Route path='/login' component={ Loginscreen } />
                 <Route path='/product/:id' component={ProductScreen} />
+                <Route path='/admin/product/:id' component={ProductEditScreen} />
+                <Route path='/admin/productlist' component={ProductListScreen} />
                 <Route path='/cart/:id?' component={CartScreen} /> {/* question mark after id makes it optional*/}
                 <Route path='/register' component={RegisterScreen} /> 
                 <Route path='/profile' component={ProfileScreen} /> 
