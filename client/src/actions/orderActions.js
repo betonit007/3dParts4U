@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { SET_TOAST } from '../constants/toastConstants'
-import { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_LISTALL_FAIL, ORDER_LISTALL_REQUEST, ORDER_LISTALL_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, } from '../constants/orderConstants'
+import { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DELIVER_REQUEST, ORDER_DELIVER_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_LISTALL_FAIL, ORDER_LISTALL_REQUEST, ORDER_LISTALL_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, } from '../constants/orderConstants'
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -128,6 +128,52 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
                     && error.response.data.msg
                     ? "Order failed, " + error.response.data.msg
                     : "Order failed, " + error.message,
+                type: "error"
+            }
+        })
+    }
+}
+
+export const deliverOrder = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ORDER_DELIVER_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/orders/${id}/deliver`, {}, config)
+
+        dispatch({
+            type: ORDER_DELIVER_SUCCESS,
+            payload: data
+        })
+
+
+    } catch (error) {
+
+        dispatch({
+            type: ORDER_DETAILS_FAIL,
+            payload: error.response
+                && error.response.data.msg
+                ? "Order failed, " + error.response.data.msg
+                : "Order failed, " + error.message,
+        })
+
+        dispatch({
+            type: SET_TOAST,
+            payload:
+            {
+                message: error.response
+                    && error.response.data.msg
+                    ? "Order delivery update failed, " + error.response.data.msg
+                    : "Order delivery update failed, " + error.message,
                 type: "error"
             }
         })

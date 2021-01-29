@@ -22,6 +22,7 @@ const PlaceOrderScreen = ({ match }) => {
     const orderPay = useSelector(state => state.orderPay)
     const { loading: loadingPay, success: successPay } = orderPay  //renaming loading and success variables
 
+
     useEffect(() => {
 
         const addPayPalScript = async () => {
@@ -38,7 +39,6 @@ const PlaceOrderScreen = ({ match }) => {
 
         if (!order || order._id !== orderId || successPay) {
             dispatch({ type: ORDER_PAY_RESET })
-            console.log(orderId)
             dispatch(getOrderDetails(orderId))
         } else if (!order.isPaid) {
             if (!window.paypal) {
@@ -53,12 +53,12 @@ const PlaceOrderScreen = ({ match }) => {
     }, [order, orderId, dispatch, successPay])
 
     const successPaymentHandler = (paymentResult) => {
-      console.log(paymentResult)
-      dispatch(payOrder(orderId, paymentResult))
+        console.log(paymentResult)
+        dispatch(payOrder(orderId, paymentResult))
     }
 
     return (
-        loading ? <Loader /> :
+        loading  ? <Loader /> :
             <>
                 <h1 className='text-center m-2' >Order #{order._id}</h1>
                 <div className='grid grid-offset my-1'>
@@ -112,15 +112,16 @@ const PlaceOrderScreen = ({ match }) => {
                             </div>
                             {!order.isPaid &&
                                 <div>
-                                   {loadingPay && <Loader />}
-                                   {!sdkReady ? <Loader /> : (
-                                       <PayPalButton 
-                                         amount={order.totalPrice} 
-                                         onSuccess={successPaymentHandler}
-                                       />
-                                   )}
+                                    {loadingPay && <Loader />}
+                                    {!sdkReady ? <Loader /> : (
+                                        <PayPalButton
+                                            amount={order.totalPrice}
+                                            onSuccess={successPaymentHandler}
+                                        />
+                                    )}
                                 </div>
                             }
+
                         </div>
                     </div>
                 </div>

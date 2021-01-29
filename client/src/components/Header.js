@@ -34,9 +34,10 @@ const Header = () => {
                           <div className="userMenu">
                               <li onClick={handleLogout}><i className="fas fa-sign-out-alt" ></i>Logout</li>
                               <li onClick={()=>history.push('/profile')}><i className="far fa-user"></i>Profile</li>
-                              <li onClick={()=>history.push('/orderhistory')}><i className="fas fa-clipboard-list"></i>Orders</li>
+                              <li onClick={()=>history.push('/orderhistory')}><i className="fas fa-clipboard-list"></i>My Orders</li>
                               {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/userlist')}><i className="fas fa-users"></i>Users</li>}
-                              {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/productlist')}><i className="fas fa-clipboard-list"></i>Products</li>}
+                              {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/productlist')}><i className="fas fa-list"></i>Products</li>}
+                              {userInfo.isAdmin &&<li onClick={()=>history.push('/admin/orderlist')}><i className="fas fa-clipboard-list"></i>All Orders</li>}
                           </div>
                           </div>
                         )

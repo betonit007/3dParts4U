@@ -68,6 +68,25 @@ const updateOrderToPaid = async (req, res) => {
 
 }
 
+const updateOrderToDelivered = async (req, res) => {
+    console.log(req.params.id)
+    const order = await Order.findById(req.params.id)
+
+    try {
+        order.isDelivered = true
+        order.deliveredAt = Date.now()
+
+        const updatedOrder = await order.save()
+        res.status(200).json(updatedOrder)
+
+    } catch (error) {
+        res.status(404).json({ msg: "Order not found" })
+    }
+
+
+
+}
+
 const getMyOrders = async (req, res) => {
 
     try {
@@ -91,4 +110,4 @@ const getOrders = async (req, res) => {
     }
 }
 
-module.exports = { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getOrders }
+module.exports = { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getOrders, updateOrderToDelivered }
