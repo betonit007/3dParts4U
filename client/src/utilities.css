@@ -15,7 +15,7 @@
     padding: 20px;
 }
 
-.input {
+input, textarea {
     border: 0;
     border-bottom: 1px solid #b4becb;
     width: 100%;
@@ -23,6 +23,7 @@
     font-size: 16px;
     outline-width: 0;
 }
+
 
 .btn {
     display: inline-block;
@@ -144,14 +145,16 @@
     width: 100%;
 }
 
+.column {
+    flex-direction: column;
+}
+
 .flex-end {
     display: flex;
     flex-direction: row-reverse;
 }
 
-.column {
-    flex-direction: column;
-}
+
 
 .grid {
     display: grid;

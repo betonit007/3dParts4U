@@ -34,17 +34,25 @@ const App = () => {
                 <Route path='/order/:id' component={OrderScreen} />
                 <Route path='/placeorder' component={PlaceOrderScreen} />
                 <Route path='/payment' component={PaymentScreen} />
-                <Route path='/login' component={ Loginscreen } />
+                <Route path='/login' component={Loginscreen} />
                 <Route path='/product/:id' component={ProductScreen} />
                 <Route path='/admin/product/:id' component={ProductEditScreen} />
-                <Route path='/admin/productlist' component={ProductListScreen} />
+                <Route path='/admin/productlist' exact component={ProductListScreen} />
+                <Route path='/admin/productlist/:pageNumber' exact component={ProductListScreen} />
                 <Route path='/cart/:id?' component={CartScreen} /> {/* question mark after id makes it optional*/}
-                <Route path='/register' component={RegisterScreen} /> 
-                <Route path='/profile' component={ProfileScreen} /> 
-                <Route path='/orderhistory' component={OrderHistoryScreen} /> 
-                <Route path='/admin/orderlist' component={OrderListScreen} /> 
-                <Route path='/admin/userlist' component={UserListScreen} /> 
-                <Route path='/admin/user/:id/edit' component={UserEditScreen} /> 
+                <Route path='/register' component={RegisterScreen} />
+                <Route path='/profile' component={ProfileScreen} />
+                <Route path='/orderhistory' component={OrderHistoryScreen} />
+                <Route path='/admin/orderlist' component={OrderListScreen} />
+                <Route path='/admin/userlist' component={UserListScreen} />
+                <Route path='/search/:keyword' component={HomeScreen} exact />
+                <Route path='/page/:pageNumber' component={HomeScreen} exact />
+                <Route
+                    path='/search/:keyword/page/:pageNumber'
+                    component={HomeScreen}
+                    exact
+                />
+                <Route path='/admin/user/:id/edit' component={UserEditScreen} />
             </main>
             <Footer />
         </Router>

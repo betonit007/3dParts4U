@@ -77,7 +77,7 @@ const RegisterScreen = ({ location, history }) => {
             </form>
 
             <div className='my-2'>
-                Already Registered? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Signin</Link>
+                Already Registered? <Link to={redirect ? `/register?redirect=${redirect}` : '/logon'}>Signin</Link>
             </div>
 
         </div>

@@ -2,9 +2,28 @@ const Product = require('../models/product')
 
 const getProducts = async (req, res) => {
 
+    //for pagination
+    const pageSize = 6
+    const page = req.query.pageNumber || 1 //get page number from query string or default to page 1
+
+    const keyword = req.query.keyword ? {
+        name: {
+            $regex: req.query.keyword, //regex searches for partial name (doesn;t have to be exact)
+            $options: 'i' // this turns case insensitivity on (not case sensitive)
+        }
+    } : {}
+
     try {
-        const products = await Product.find({})
-        res.json(products)
+
+        // get total amount of products for equally dividing them for pagination
+        const count = await Product.countDocuments({ ...keyword }) //spread in keyword if user is searching
+
+        // return products factoring in what page user is requesting (skip method allows you to skip by x amount)
+        const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1))
+
+        // sending back the products, the page, and pages (num of pages): 
+        res.json({ products, page, pages: Math.ceil(count / pageSize) })
+
     } catch (error) {
         res.json({ msg: "Error retreiving products" })
     }

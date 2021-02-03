@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 
-const UserListScreen = ({ history }) => {
+const UserListScreen = ({ history, match }) => {
+
+    const pageNumber = match.params.pageNumber || 1
 
     const dispatch = useDispatch()
 
@@ -12,26 +15,26 @@ const UserListScreen = ({ history }) => {
     const { userInfo } = userLogin
 
     const productList = useSelector(state => state.productList)
-    const { loading, products } = productList
+    const { loading, products, page, pages } = productList
 
     const productDelete = useSelector(state => state.productDelete)
-    const { loading:loadingDelete, success:succesDelete } = productDelete
+    const { loading: loadingDelete, success: succesDelete } = productDelete
 
     const productCreate = useSelector(state => state.productCreate)
-    const { loading:loadingCreate, success:successCreate } = productCreate
+    const { loading: loadingCreate, success: successCreate } = productCreate
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listProducts())
+            dispatch(listProducts('', pageNumber)) //empty string because we don't want to filter any products
         } else {
             history.push('/login')
         }
-    }, [dispatch, history, userInfo, succesDelete, successCreate])
+    }, [dispatch, history, userInfo, succesDelete, successCreate, pageNumber])
 
     const handleDelete = id => {
 
         if (window.confirm("Delete Product?")) {
-           dispatch(deleteProduct(id))
+            dispatch(deleteProduct(id))
         }
     }
 
@@ -73,9 +76,14 @@ const UserListScreen = ({ history }) => {
                             ))}
                         </tbody>
                     </table>
-                   <div onClick={handleCreate}className='ml-auto p-1 pointer text-primary'>
-                       <i className="fas fa-plus"></i> <span>Add Product</span>
-                   </div>
+                    <div onClick={handleCreate} className='ml-auto p-1 pointer text-primary'>
+                        <i className="fas fa-plus"></i> <span>Add Product</span>
+                    </div>
+                    <Paginate 
+                      pages={pages} 
+                      page={page} 
+                      isAdmin={userInfo.isAdmin}
+                   />
                 </>
             }
         </div>

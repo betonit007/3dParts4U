@@ -17,7 +17,7 @@ const PlaceOrderScreen = ({ history }) => {
     cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
 
     cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
-    console.log(cart.shippingPrice)
+
     cart.taxPrice = addDecimals(Number((0.10 * cart.itemsPrice).toFixed(2)))
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
@@ -93,7 +93,7 @@ const PlaceOrderScreen = ({ history }) => {
                             <p><strong>Sub Total: </strong>${cart.itemsPrice}</p>
                             <p><strong>Shipping: </strong>{cart.shippingPrice}</p>
                             <p><strong>Tax: </strong>{cart.taxPrice}</p>
-                            <p className='m-1'><h3>Total: </h3><strong>${cart.totalPrice}</strong></p>
+                            <p ><strong className='m-1'>Total: </strong><strong>${cart.totalPrice}</strong></p>
                             <button onClick={placeOrderHandler} className='btn btn-light m-1'>Place Order</button>
                         </div>
 

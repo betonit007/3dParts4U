@@ -57,7 +57,7 @@ const Loginscreen = ({ location, history }) => {
             </form>
 
             <div className='my-2'>
-                New Customer? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
+                New Customer? <Link to={redirect ? `/register?redirect=${redirect}` : '/logon'}>Register</Link>
             </div>
 
         </div>
