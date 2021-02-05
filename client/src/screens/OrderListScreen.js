@@ -52,7 +52,12 @@ const OrderListScreen = ({ history }) => {
                             </tr>
                             {orders.map(order => (
                                 <tr key={order._id}>
-                                    <td><Link to={`/order/${order._id}/edit`}>{order._id}</Link></td>
+                                    <td>
+                                        <Link 
+                                          className='text-primary'
+                                          to={`/order/${order._id}/edit`}>{order._id}
+                                        </Link>
+                                    </td>
                                     <td>{new Date(order.createdAt).toLocaleDateString('en-US')}</td>
                                     <td>{order.paymentResult && order.paymentResult.status}</td>
                                     <td><a href={`mailto:${order.paymentResult && order.paymentResult.email_address}`}>{order.paymentResult && order.paymentResult.email_address}</a></td>
@@ -78,7 +83,6 @@ const OrderListScreen = ({ history }) => {
                             ))}
                         </tbody>
                     </table>
-                    <p className='text-primary my-1'>*Click Id to view individual customer order.</p>
                 </div>
             }
         </div>

@@ -20,15 +20,18 @@ const HomeScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
-  
+
   return (
     <>
       { loading ? <Loader />
         :
         <div className="flex column">
-          <Carousel 
-            topProducts={products.sort((a,b) => b.rating - a.rating).slice(0, 3)}
+          {(!keyword && page === '1') && 
+          <Carousel
+            topProducts={products.sort((a, b) => b.rating - a.rating).slice(0, 3)}
+            page={page}
           />
+          }
           <div className="grid grid-3 my-2">
             {products.map(product => <Product key={product._id} product={product} />)}
 
