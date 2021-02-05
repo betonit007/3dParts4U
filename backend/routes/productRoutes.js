@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getProductbyId, getProducts, deleteProductById, updateProduct, createProduct, createProductReview } = require('../controllers/productController')
+const { getProductbyId, getProducts, deleteProductById, updateProduct, createProduct, createProductReview, getTopRatedProducts } = require('../controllers/productController')
 const { protect, isAdmin } = require('../middleware/authMiddleware')
 
 router.route('/')
@@ -8,6 +8,8 @@ router.route('/')
     .get(getProducts)
 
 router.route('/:id/reviews').post(protect, createProductReview)
+
+router.get('/top', getTopRatedProducts)
 
 router.route('/:id').get(getProductbyId)
 

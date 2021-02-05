@@ -256,6 +256,66 @@ h1, h2 {
     animation: slideOn 0.3s linear forwards;
 }
 
+/* For the Custom Carousel */
+.carousel-container {
+
+    /* background-color: black; */
+}
+
+.carousel-inner {
+    position: relative;
+    display: flex;
+    height: 400px;
+    width: 600px;
+    max-width: 90vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: .3s linear;
+}
+
+.carousel-inner .left,
+.carousel-inner .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 5%;
+  height: 100%;
+}
+
+.carousel-inner .center {
+    position: relative;
+    flex: 90%;
+    height: 100%;
+    display: flex;
+    /*AFTER implementation of setInterval */
+    flex-direction: column-reverse;
+    justify-content: end;
+    align-items: center;
+}
+
+.carousel-inner .left i,
+.carousel-inner .right i,
+.center i {
+    cursor: pointer;
+    color: rgba(131, 123, 123, 0.705);
+    opacity: .8;
+}
+
+.carousel-inner .left i:active,
+.carousel-inner .right i:active {
+    transform: scale(.97)
+}
+
+.center i.fa-play {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* End Custom Carousel */
+
 /* Toggle Animations start */
 
 @keyframes slideOn {

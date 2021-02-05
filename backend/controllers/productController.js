@@ -147,4 +147,20 @@ const createProductReview = async (req, res) => {
 
 }
 
-module.exports = { getProducts, getProductbyId, deleteProductById, createProduct, updateProduct, createProductReview }
+const getTopRatedProducts = async (req, res) => {
+
+    try {
+
+        const products = await Product.find({}).sort({ rating: -1 }).limit(3)
+
+  res.json(products)
+        
+    } catch (error) {
+        res.json({ msg: "Top Products not found", error })
+
+    }
+  
+    
+}
+
+module.exports = { getProducts, getProductbyId, deleteProductById, createProduct, updateProduct, createProductReview, getTopRatedProducts }
