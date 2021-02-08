@@ -154,8 +154,6 @@ input, textarea {
     flex-direction: row-reverse;
 }
 
-
-
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -188,6 +186,10 @@ input, textarea {
 
 .ml-auto {
     margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
 }
 
 .mx-1 {

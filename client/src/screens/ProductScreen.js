@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
 import SelectRating from '../components/SelectRating'
 import ImageLoader from '../components/ImageLoader'
+import Meta from '../components/Meta'
 import { listProductsDetails, createProductReview } from '../actions/productActions'
 import Loader from '../components/Loader'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { setToast } from '../actions/toastActions'
 
 const ProductScreen = ({ match, history }) => {
@@ -45,6 +45,7 @@ const ProductScreen = ({ match, history }) => {
 
     return (
         <>
+            <Meta title={product.name} />
             <Link className='btn my-1' to='/'>Go Back</Link>
             { loading  ? <Loader /> :
                 <div className="grid">

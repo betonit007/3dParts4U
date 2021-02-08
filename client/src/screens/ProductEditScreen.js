@@ -131,15 +131,6 @@ const ProductEditScreen = ({ match, history }) => {
                                 type="text"
                                 required={true}
                                 className='input my-1'
-                                placeholder='Image Url'
-                                value={image}
-                                onChange={e => setImage(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                required={true}
-                                className='input my-1'
                                 placeholder='Brand'
                                 value={brand}
                                 onChange={e => setBrand(e.target.value)}

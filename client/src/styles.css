@@ -114,15 +114,21 @@ h1, h2 {
     cursor: pointer;
 }
 
-#user-link:hover+.userMenu {
+/* #user-link:hover+.userMenu {
+    animation: mouse-in .4s linear;
+    animation-fill-mode: forwards;
+} */
+
+.show-user-menu{
     animation: mouse-in .4s linear;
     animation-fill-mode: forwards;
 }
 
-.userMenu:hover {
+
+/* .userMenu:hover {
     top: 30px;
     z-index: 1;
-}
+} */
 
 .userMenu li {
     display: flex;
@@ -312,7 +318,6 @@ h1, h2 {
     bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
 }
 
 /* End Custom Carousel */
@@ -372,6 +377,34 @@ h1, h2 {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+@keyframes mouse-out {
+    
+    25% {
+        top: 30px;
+        z-index: 2;
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        top: 45px;
+        opacity: .6;
+        transform: scale(.75);
+    }
+    75% {
+        top: 60px;
+        z-index: -1;
+        opacity: .4;
+        transform: scale(.4);
+    }
+    100% {
+        top: -5px;
+        z-index: -1;
+        opacity: .2;
+        transform: scale(.3);
+    }
+    
 }
 
 

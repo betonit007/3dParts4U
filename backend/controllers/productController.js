@@ -19,7 +19,7 @@ const getProducts = async (req, res) => {
         const count = await Product.countDocuments({ ...keyword }) //spread in keyword if user is searching
 
         // return products factoring in what page user is requesting (skip method allows you to skip by x amount)
-        const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1))
+        const products = await Product.find({ ...keyword }).sort({createdAt: -1}).limit(pageSize).skip(pageSize * (page - 1))
 
         // sending back the products, the page, and pages (num of pages): 
         res.json({ products, page, pages: Math.ceil(count / pageSize) })

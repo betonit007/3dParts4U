@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from '../actions/toastActions'
 import { Link, useHistory } from 'react-router-dom'
@@ -13,10 +13,11 @@ const Header = ({ match }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const [ toggleUserMenu, setToggleUserMenu ] = useState(false)
+
     const handleLogout = () => {
+        setToggleUserMenu(false)
         dispatch(logout())
-        history.push('/login')
-        dispatch(setToast('You have successfully logged out.'))
     }
 
     return (
@@ -35,8 +36,13 @@ const Header = ({ match }) => {
                         <li><Link to="/cart"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
                         {userInfo ? (
                             <div className="userContainer">
-                                <li id="user-link"><Link to="#"><i className="far fa-user-circle"></i> {userInfo.name}</Link></li>
-                                <div className="userMenu">
+                                <li id="user-link" onClick={()=>setToggleUserMenu(!toggleUserMenu)}>
+                                    <Link to="#"><i className="far fa-user-circle"></i> {userInfo.name}</Link>
+                                </li>
+                                <div 
+                                  className={`userMenu ${toggleUserMenu ? 'show-user-menu' : ''}`}
+                                  onMouseLeave={()=>setToggleUserMenu(false)}
+                                >
                                     <li onClick={handleLogout}><i className="fas fa-sign-out-alt" ></i>Logout</li>
                                     <li onClick={() => history.push('/profile')}><i className="far fa-user"></i>Profile</li>
                                     <li onClick={() => history.push('/orderhistory')}><i className="fas fa-clipboard-list"></i>My Orders</li>

@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
+const path = require('path')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 
@@ -29,6 +30,12 @@ app.use('/api/upload', uploadRoutes)
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
 app.use('/uploads', express.static('uploads')) //making upload folder static
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')))
+
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
+}
 
 app.use(notFound)
 app.use(errorHandler)

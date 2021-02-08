@@ -48,7 +48,7 @@ const Carousel = ({ topProducts: products }) => {
             {pause.paused && <i onClick={handleLeftClick} className="fas fa-angle-double-left fa-3x"></i>}
           </div>
           <div onClick={() => setPause({ ...pause, paused: !pause.paused })} className="center" >
-            <Link to={`/product/${products[pause.index]._id}`}>
+            <Link className='text-primary' to={`/product/${products[pause.index]._id}`}>
               <h1>{products[pause.index].name} - <span>${products[pause.index].price}</span></h1>
             </Link>
 
