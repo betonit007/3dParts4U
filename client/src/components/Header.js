@@ -18,6 +18,7 @@ const Header = ({ match }) => {
     const handleLogout = () => {
         setToggleUserMenu(false)
         dispatch(logout())
+        history.push('/login')
     }
 
     return (
