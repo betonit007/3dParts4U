@@ -22,7 +22,7 @@ const HomeScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
-  console.log(products)
+  
   return (
     <>
       <Meta />

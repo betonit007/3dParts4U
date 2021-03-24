@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 import SearchBox from './SearchBox'
 
-const Header = ({ match }) => {
+const Header = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()

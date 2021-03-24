@@ -102,7 +102,7 @@ const ProductScreen = ({ match, history }) => {
                             </div>
                         ))}
                         <div className='my-3 p-1 border' style={{ display: 'block', width: 'auto' }}>
-                            {userInfo &&
+                            {userInfo ?
                                 <div >
                                     <h2 className='my-1'>Rate this Product!</h2>
                                     <form onSubmit={submitHandler}>
@@ -117,6 +117,10 @@ const ProductScreen = ({ match, history }) => {
                                         </div>
                                         <button className='btn my-1' type='submit'>Submit</button>
                                     </form>
+                                </div>
+                                :
+                                <div>
+                                    <h2 className='text-center'>LOGIN TO REVIEW THIS PRODUCT!</h2>
                                 </div>
                             }
                         </div>
